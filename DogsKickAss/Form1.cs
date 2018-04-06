@@ -83,7 +83,7 @@ namespace DogsKickAss
                 for (int x = 0; x < model.Width; x++)
                 {
                     //defines the rectangle to be filled orr bordered
-                    Rectangle Cell = new Rectangle((x * 100) + model.cameraXOffSet, (y * 100) + model.cameraYOffSet, 100, 100);
+                    Rectangle Cell = new Rectangle((x * 100), (y * 100), 100, 100);
                     //Borders every cell in the map
                     g.DrawRectangle(pen, Cell);
                     //Fills in any true ones
