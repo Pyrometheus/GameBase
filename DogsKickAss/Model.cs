@@ -55,14 +55,12 @@ namespace DogsKickAss
     public class Player
     {
         //MOVEMENT
-        public static float left = 0;
-        public static float right = 0;
-        public static float jump = 0;
-        public static float fall = 0;
-        public static float Xspeed = 5;//cannot safely excede the length of one GRID CELL
-        public static float Yspeed = 5;//cannot safely excede the length of one GRID CELL
+        public static float xVelocity = 0;
+        public static float yVelocity = 0;
         public static float jumpForce = 10;
         public static float fallForce = 0;
+        public static float xSpeeed = 5;
+        public static float ySpeeed = 5;
         //Current and Future positions
         public static Point current = new Point(400, 400);
         public static Point future = new Point(400, 400);//(make future and current have same starting value)
@@ -80,8 +78,8 @@ namespace DogsKickAss
             //Updates the PLAYER Properties
             Player.hitbox.Position.future.x = Player.hitbox.Position.current.x;//Binds FUTURE.X to CURRENT.X
             Player.hitbox.Position.future.y = Player.hitbox.Position.current.y;//Binds FUTURE.Y to CURRENT.Y
-            Player.hitbox.Position.future.x += Player.left + Player.right;//adds the key-inputs to FUTURE.X
-            Player.hitbox.Position.future.y += Player.jump + Player.fall;//adds the key-inputs to FUTURE.Y
+            Player.hitbox.Position.future.x += Player.xVelocity;//adds the key-inputs to FUTURE.X
+            Player.hitbox.Position.future.y += Player.yVelocity + fallForce;//adds the key-inputs to FUTURE.Y
             //Renews the PLAYER Properties for ease of reference
             Position = Player.hitbox.Position;
             current = Position.current;
@@ -93,19 +91,60 @@ namespace DogsKickAss
             int leftGridBounds = (int)(future.x - width / 2) / 100;
             int upperGridBounds = (int)(future.y - height / 2) / 100;
             int lowerGridBounds = (int)(future.y + height / 2) / 100;
-            //Movement Checks and Updates
-            if (model.Cells[leftGridBounds, upperGridBounds] == null && model.Cells[rightGridBounds, upperGridBounds] == null)
-            {
-                Player.Xspeed = 5;
-                Player.hitbox.Position.current.x = Player.hitbox.Position.future.x;
-            } else if (Xspeed < 5)
-                Xspeed -= 1;
-            if (model.Cells[leftGridBounds, lowerGridBounds] == null && model.Cells[rightGridBounds, upperGridBounds] == null)
-            {
-                Player.Yspeed = 5;
-                Player.hitbox.Position.current.y = Player.hitbox.Position.future.y;
-            } else if (Yspeed < 6)
-                Yspeed -= 1;
+
+            tryCollide(model, leftGridBounds, upperGridBounds);
+            tryCollide(model, rightGridBounds, upperGridBounds);
+            tryCollide(model, leftGridBounds, lowerGridBounds);
+            tryCollide(model, rightGridBounds, lowerGridBounds);
+
+            current.x = future.x;
+            current.y = future.y;
+
         }
+
+        public void tryCollide(Model model, int cellX, int cellY)
+        {
+            if (cellX < 0 || cellX >= model.Width)
+                return;
+            if (cellY < 0 || cellY >= model.Height)
+                return;
+            if (model.Cells[cellX, cellY] != null)
+                collide(cellX, cellY);
+        }
+
+        public void collide(int cellX, int cellY)
+        {
+            int centerCellX = cellX * 100 + 50;
+            int centerCellY = cellY * 100 + 50;
+
+            float dx = Player.hitbox.Position.future.x - centerCellX;
+            float dy = Player.hitbox.Position.future.y - centerCellY;
+
+            if (dy > dx)
+            {
+                if (dy > -dx)
+                {
+                    //Console.WriteLine("Collide Down");
+                    future.y = centerCellY + 50 + height / 2;
+                } else
+                {
+                    //Console.WriteLine("Collide Right");
+                    future.x = centerCellX - 50 - width / 2;
+                }
+            } else
+            {
+                if (dy > -dx)
+                {
+                    //Console.WriteLine("Collide Left");
+                    future.x = centerCellX + 50 + width / 2;
+                }
+                else
+                {
+                    //Console.WriteLine("Collide Up");
+                    future.y = centerCellY - 50 - height / 2;
+                }
+            }
+        }
+
     }
 }

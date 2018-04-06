@@ -21,20 +21,20 @@ namespace DogsKickAss
             this.pictureBox1.Paint += PictureBox_Paint;
         }
         //GLOBAL VARIABLES
-        Player Player = new Player();
+        Player player = new Player();
         Model Model = new Model(25, 25);
         //KEYBOARD FUNCTIONS
         public void InputKeyDown(object sender, KeyEventArgs e)
         {
             //movement KEYS
             if (e.KeyCode == Keys.W)
-                Player.jump = -Player.Yspeed;
+                Player.yVelocity = -Player.ySpeeed;
             if (e.KeyCode == Keys.A)
-                Player.left = -Player.Xspeed;
+                Player.xVelocity = -Player.xSpeeed;
             if (e.KeyCode == Keys.S)
-                Player.fall = Player.Yspeed;
+                Player.yVelocity = Player.ySpeeed;
             if (e.KeyCode == Keys.D)
-                Player.right = Player.Xspeed;
+                Player.xVelocity = Player.xSpeeed;
             //Function KEYS
             if (e.KeyCode == Keys.Escape)
                 this.Close();
@@ -43,19 +43,19 @@ namespace DogsKickAss
         {
             //movement KEYS
             if (e.KeyCode == Keys.W)
-                Player.jump = 0;
+                Player.yVelocity = 0;
             if (e.KeyCode == Keys.A)
-                Player.left = 0;
-            if (e.KeyCode == Keys.D)
-                Player.right = 0;
+                Player.xVelocity = 0;
             if (e.KeyCode == Keys.S)
-                Player.fall = 0;
+                Player.yVelocity = 0;
+            if (e.KeyCode == Keys.D)
+                Player.xVelocity = 0;
         }
         //CHANGE FUNCTION
         public void update()
         {
             //Recalls ALL PLAYER VARIABLES To make certain they're current
-            Player.Move(Model);
+            player.Move(Model);
         }
         //DISPLAY FUNCTION
         public void Render(Graphics g)
