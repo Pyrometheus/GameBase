@@ -1,0 +1,10 @@
+C:\Projects\DogsKickAss\DogsKickAss\bin\Debug\DogsKickAss.exe.config
+C:\Projects\DogsKickAss\DogsKickAss\bin\Debug\DogsKickAss.exe
+C:\Projects\DogsKickAss\DogsKickAss\bin\Debug\DogsKickAss.pdb
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.csprojResolveAssemblyReference.cache
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.Form1.resources
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.Properties.Resources.resources
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.csproj.GenerateResource.cache
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.csproj.CoreCompileInputs.cache
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.exe
+C:\Projects\DogsKickAss\DogsKickAss\obj\Debug\DogsKickAss.pdb
