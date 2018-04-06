@@ -60,6 +60,7 @@ namespace DogsKickAss
         //DISPLAY FUNCTION
         public void Render(Graphics g)
         {
+            g.TranslateTransform(pictureBox1.Width / 2 - player.hitbox.Position.current.x, pictureBox1.Height / 2 - player.hitbox.Position.current.y);
             //clears all previous drawings from the picturebox
             g.Clear(Color.FromArgb(200, 120, 120, 255));
             //BRUSHES AND PENS
@@ -82,7 +83,7 @@ namespace DogsKickAss
                 for (int x = 0; x < model.Width; x++)
                 {
                     //defines the rectangle to be filled orr bordered
-                    Rectangle Cell = new Rectangle((x) * 100, (y) * 100, 100, 100);
+                    Rectangle Cell = new Rectangle((x * 100) + model.cameraXOffSet, (y * 100) + model.cameraYOffSet, 100, 100);
                     //Borders every cell in the map
                     g.DrawRectangle(pen, Cell);
                     //Fills in any true ones

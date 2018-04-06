@@ -8,6 +8,9 @@ namespace DogsKickAss
 {
     public class Model
     {
+        //Camera controls
+        public int cameraXOffSet;
+        public int cameraYOffSet;
         //initialize all the dimensions
         public readonly int Width;
         public readonly int Height;
@@ -19,6 +22,8 @@ namespace DogsKickAss
 
         public Model(int width, int height)
         {
+            this.cameraXOffSet = 0;
+            this.cameraYOffSet = 0;
             this.Width = width;
             this.Height = height;
             Cells = new Boolean?[width, height];
@@ -50,6 +55,18 @@ namespace DogsKickAss
             Cells[4, 5] = true;
             Cells[5, 5] = true;
             Cells[6, 5] = true;
+            Cells[7, 5] = true;
+            Cells[12, 5] = true;
+        }
+        public static void makeWall(Model model, int startX, int startY, int finishX, int finishY)
+        {
+            for (int y = startY; y < finishY; y++)
+            {
+                for(int x = startX; x < finishX; x++)
+                {
+                    model.Cells[x, y] = true;
+                }
+            }
         }
     }
 }
