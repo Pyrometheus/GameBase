@@ -22,19 +22,19 @@ namespace DogsKickAss
         }
         //GLOBAL VARIABLES
         Player player = new Player();
-        Model Model = new Model(25, 25);
+        Model model = new Model(25, 25);
         //KEYBOARD FUNCTIONS
         public void InputKeyDown(object sender, KeyEventArgs e)
         {
             //movement KEYS
             if (e.KeyCode == Keys.W)
-                Player.yVelocity = -Player.ySpeeed;
+                player.yVelocity = -player.ySpeeed;
             if (e.KeyCode == Keys.A)
-                Player.xVelocity = -Player.xSpeeed;
+                player.xVelocity = -player.xSpeeed;
             if (e.KeyCode == Keys.S)
-                Player.yVelocity = Player.ySpeeed;
+                player.yVelocity = player.ySpeeed;
             if (e.KeyCode == Keys.D)
-                Player.xVelocity = Player.xSpeeed;
+                player.xVelocity = player.xSpeeed;
             //Function KEYS
             if (e.KeyCode == Keys.Escape)
                 this.Close();
@@ -43,19 +43,19 @@ namespace DogsKickAss
         {
             //movement KEYS
             if (e.KeyCode == Keys.W)
-                Player.yVelocity = 0;
+                player.yVelocity = 0;
             if (e.KeyCode == Keys.A)
-                Player.xVelocity = 0;
+                player.xVelocity = 0;
             if (e.KeyCode == Keys.S)
-                Player.yVelocity = 0;
+                player.yVelocity = 0;
             if (e.KeyCode == Keys.D)
-                Player.xVelocity = 0;
+                player.xVelocity = 0;
         }
         //CHANGE FUNCTION
         public void update()
         {
             //Recalls ALL PLAYER VARIABLES To make certain they're current
-            player.Move(Model);
+            player.Move(model);
         }
         //DISPLAY FUNCTION
         public void Render(Graphics g)
@@ -66,8 +66,8 @@ namespace DogsKickAss
             Pen background = new Pen(Color.Black);
             Brush black = new SolidBrush(Color.Black);
             Brush red = new SolidBrush(Color.Red);
-            DrawGrid(g, background, black, Model);
-            DrawBlock(g, red, Player.hitbox);
+            DrawGrid(g, background, black, model);
+            DrawBlock(g, red, player.hitbox);
         }
         //RENDER FUNCTIONS
         public void DrawBlock(Graphics g, Brush brush, Block block)

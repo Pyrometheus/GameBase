@@ -22,5 +22,12 @@ namespace DogsKickAss
             this.height = h;
             this.width = w;
         }
+        public Block()
+        {
+            this.Position = new Vector(new Point(0, 0), new Point(0, 0));
+            this.weight = 0;
+            this.height = 0;
+            this.width = 0;
+        }
     }
 }

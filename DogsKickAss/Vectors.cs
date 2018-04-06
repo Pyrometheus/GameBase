@@ -13,13 +13,18 @@ namespace DogsKickAss
         public readonly Point Grid;
         public Point(int nx, int ny)
         {
-            x = (float)nx;
-            y = (float)ny;
+            this.x = (float)nx;
+            this.y = (float)ny;
         }
         public Point(float nx, float ny)
         {
-            x = nx;
-            y = ny;
+            this.x = nx;
+            this.y = ny;
+        }
+        public Point()
+        {
+            this.x = 0;
+            this.y = 0;
         }
     }
     public class Vector
@@ -36,6 +41,14 @@ namespace DogsKickAss
             xDist = current.x - future.x;
             yDist = current.y - future.y;
             Magnitude = (float)Math.Sqrt(xDist*xDist + yDist*yDist);
+        }
+        public Vector()
+        {
+            current = new Point();
+            future = new Point();
+            xDist = current.x - future.x;
+            yDist = current.y - future.y;
+            Magnitude = (float)Math.Sqrt(xDist * xDist + yDist * yDist);
         }
     }
 }
