@@ -16,46 +16,34 @@ namespace DogsKickAss
         {
             //KEY CONTROLS CALLED
             this.KeyDown += InputKeyDown;
-            this.KeyUp += InputKeyUp;
+            //this.KeyUp += InputKeyUp;
+
+            this.KeyDown += model.InputKeyDown;
+            this.KeyUp += model.InputKeyUp;
+
             InitializeComponent();
             this.pictureBox1.Paint += PictureBox_Paint;
         }
         //GLOBAL VARIABLES
         Player player = new Player();
         Model model = new Model(25, 25);
+
         //KEYBOARD FUNCTIONS
         public void InputKeyDown(object sender, KeyEventArgs e)
         {
-            //movement KEYS
-            if (e.KeyCode == Keys.W)
-                player.yVelocity = -player.ySpeeed;
-            if (e.KeyCode == Keys.A)
-                player.xVelocity = -player.xSpeeed;
-            if (e.KeyCode == Keys.S)
-                player.yVelocity = player.ySpeeed;
-            if (e.KeyCode == Keys.D)
-                player.xVelocity = player.xSpeeed;
-            //Function KEYS
             if (e.KeyCode == Keys.Escape)
                 this.Close();
         }
-        public void InputKeyUp(object sender, KeyEventArgs e)
-        {
-            //movement KEYS
-            if (e.KeyCode == Keys.W)
-                player.yVelocity = 0;
-            if (e.KeyCode == Keys.A)
-                player.xVelocity = 0;
-            if (e.KeyCode == Keys.S)
-                player.yVelocity = 0;
-            if (e.KeyCode == Keys.D)
-                player.xVelocity = 0;
-        }
+        //public void InputKeyUp(object sender, KeyEventArgs e)
+        //{
+        //}
+
         //CHANGE FUNCTION
         public void update()
         {
             //Recalls ALL PLAYER VARIABLES To make certain they're current
-            player.Move(model);
+            player.Update(model);
+            player.Physics(model);
         }
         //DISPLAY FUNCTION
         public void Render(Graphics g)
@@ -84,8 +72,8 @@ namespace DogsKickAss
                 {
                     //defines the rectangle to be filled orr bordered
                     Rectangle Cell = new Rectangle(
-                        (int) (x * model.cellWidth), (int) (y * model.cellHeight), 
-                        (int) model.cellWidth,       (int) model.cellWidth);
+                        x * model.cellWidth, y * model.cellHeight, 
+                       model.cellWidth,      model.cellWidth);
                     //Borders every cell in the map
                     g.DrawRectangle(pen, Cell);
                     //Fills in any true ones

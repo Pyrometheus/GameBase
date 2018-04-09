@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DogsKickAss
 {
@@ -46,16 +47,30 @@ namespace DogsKickAss
             this.weight = 25;
             //HITBOX INITIALIZATION
             this.hitbox = new Block(Position, weight, width, height);
-
         }
+
+        public void Update(Model model)
+        {
+            xVelocity = 0;
+            yVelocity = 0;
+            if (model.isKeyDown(Keys.A))
+                xVelocity += -xSpeeed;
+            if (model.isKeyDown(Keys.D))
+                xVelocity += xSpeeed;
+            if (model.isKeyDown(Keys.W))
+                yVelocity += -ySpeeed;
+            if (model.isKeyDown(Keys.S))
+                yVelocity += ySpeeed;
+        }
+
         //MOVEMENT FUNCTION
-        public void Move(Model model)
+        public void Physics(Model model)
         {
             //Updates the PLAYER Properties
             hitbox.Position.future.x = hitbox.Position.current.x;//Binds FUTURE.X to CURRENT.X
             hitbox.Position.future.y = hitbox.Position.current.y;//Binds FUTURE.Y to CURRENT.Y
             hitbox.Position.future.x += xVelocity;//adds the key-inputs to FUTURE.X
-            hitbox.Position.future.y += yVelocity + fallForce;//adds the key-inputs to FUTURE.Y
+            hitbox.Position.future.y += yVelocity;//adds the key-inputs to FUTURE.Y
             //Renews the PLAYER Properties for ease of reference
             Position = hitbox.Position;
             current = Position.current;
@@ -63,10 +78,10 @@ namespace DogsKickAss
             width = hitbox.width;
             height = hitbox.height;
             //Bounds
-            int rightGridBounds = (int)(future.x + width / 2) / 100;
-            int leftGridBounds = (int)(future.x - width / 2) / 100;
-            int upperGridBounds = (int)(future.y - height / 2) / 100;
-            int lowerGridBounds = (int)(future.y + height / 2) / 100;
+            int rightGridBounds = (int) ((future.x + width / 2) / model.cellWidth);
+            int leftGridBounds =  (int) ((future.x - width / 2) / model.cellWidth);
+            int upperGridBounds = (int) ((future.y - height / 2) / model.cellHeight);
+            int lowerGridBounds = (int) ((future.y + height / 2) / model.cellHeight);
 
             tryCollide(model, leftGridBounds, upperGridBounds);
             tryCollide(model, rightGridBounds, upperGridBounds);
@@ -81,13 +96,13 @@ namespace DogsKickAss
         public void tryCollide(Model model, int cellX, int cellY)
         {
             if (model.Occupied(cellX, cellY))
-                collide(cellX, cellY);
+                collide(model, cellX, cellY);
         }
 
-        public void collide(int cellX, int cellY)
+        public void collide(Model model, int cellX, int cellY)
         {
-            int centerCellX = cellX * 100 + 50;
-            int centerCellY = cellY * 100 + 50;
+            int centerCellX = cellX * model.cellWidth + model.cellWidth / 2;
+            int centerCellY = cellY * model.cellHeight + model.cellHeight / 2;
 
             float dx = hitbox.Position.future.x - centerCellX;
             float dy = hitbox.Position.future.y - centerCellY;
