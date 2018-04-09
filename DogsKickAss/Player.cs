@@ -80,11 +80,7 @@ namespace DogsKickAss
 
         public void tryCollide(Model model, int cellX, int cellY)
         {
-            if (cellX < 0 || cellX >= model.Width)//only collides with Grid Cells
-                return;
-            if (cellY < 0 || cellY >= model.Height)//only collides with Grid Cells
-                return;
-            if (model.Cells[cellX, cellY] != null)
+            if (model.Occupied(cellX, cellY))
                 collide(cellX, cellY);
         }
 

@@ -78,16 +78,18 @@ namespace DogsKickAss
         public void DrawGrid(Graphics g, Pen pen, Brush brush, Model model)
         {
             //loops through rows then individual cells within the rows
-            for (int y = 0; y < model.Height; y++)
+            for (int y = 0; y < model.height; y++)
             {
-                for (int x = 0; x < model.Width; x++)
+                for (int x = 0; x < model.width; x++)
                 {
                     //defines the rectangle to be filled orr bordered
-                    Rectangle Cell = new Rectangle((x * 100), (y * 100), 100, 100);
+                    Rectangle Cell = new Rectangle(
+                        (int) (x * model.cellWidth), (int) (y * model.cellHeight), 
+                        (int) model.cellWidth,       (int) model.cellWidth);
                     //Borders every cell in the map
                     g.DrawRectangle(pen, Cell);
                     //Fills in any true ones
-                    if (model.Cells[x, y] == true)
+                    if (model.Occupied(x, y))
                         g.FillRectangle(brush, Cell);
                 }
             }
