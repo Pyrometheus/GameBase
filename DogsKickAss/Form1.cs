@@ -43,7 +43,7 @@ namespace DogsKickAss
         {
             //Recalls ALL PLAYER VARIABLES To make certain they're current
             player.Update(model);
-            player.Physics(model);
+            player.SquarePhysics(model);
         }
         //DISPLAY FUNCTION
         public void Render(Graphics g)

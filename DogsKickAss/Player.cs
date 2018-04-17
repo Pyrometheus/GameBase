@@ -13,9 +13,10 @@ namespace DogsKickAss
         public float xVelocity;
         public float yVelocity;
         public float jumpForce;
+        public bool grounded = true;
         public float fallForce;
-        public float xSpeeed;
-        public float ySpeeed;
+        public float xSpeed;
+        public float ySpeed;
         //Current and Future positions
         public Point current;
         public Point future;//(make future and current have same starting value)
@@ -34,8 +35,8 @@ namespace DogsKickAss
             this.yVelocity = 0;
             this.jumpForce = 10;
             this.fallForce = 0;
-            this.xSpeeed = 5;
-            this.ySpeeed = 5;
+            this.xSpeed = 5;
+            this.ySpeed = 5;
             //Current and Future positions
             this.current = new Point(400, 400);
             this.future = new Point(400, 400);//(make future and current have same starting value)
@@ -54,17 +55,17 @@ namespace DogsKickAss
             xVelocity = 0;
             yVelocity = 0;
             if (model.isKeyDown(Keys.A))
-                xVelocity += -xSpeeed;
+                xVelocity += -xSpeed;
             if (model.isKeyDown(Keys.D))
-                xVelocity += xSpeeed;
+                xVelocity += xSpeed;
             if (model.isKeyDown(Keys.W))
-                yVelocity += -ySpeeed;
+                yVelocity += -ySpeed;
             if (model.isKeyDown(Keys.S))
-                yVelocity += ySpeeed;
+                yVelocity += ySpeed;
         }
 
         //MOVEMENT FUNCTION
-        public void Physics(Model model)
+        public void SquarePhysics(Model model)
         {
             //Updates the PLAYER Properties
             hitbox.Position.future.x = hitbox.Position.current.x;//Binds FUTURE.X to CURRENT.X
@@ -77,6 +78,8 @@ namespace DogsKickAss
             future = Position.future;
             width = hitbox.width;
             height = hitbox.height;
+            //Grounded Check
+
             //Bounds
             int rightGridBounds = (int) ((future.x + width / 2) / model.cellWidth);
             int leftGridBounds =  (int) ((future.x - width / 2) / model.cellWidth);
@@ -96,10 +99,10 @@ namespace DogsKickAss
         public void tryCollide(Model model, int cellX, int cellY)
         {
             if (model.Occupied(cellX, cellY))
-                collide(model, cellX, cellY);
+                squarecollide(model, cellX, cellY);
         }
 
-        public void collide(Model model, int cellX, int cellY)
+        public void squarecollide(Model model, int cellX, int cellY)
         {
             int centerCellX = cellX * model.cellWidth + model.cellWidth / 2;
             int centerCellY = cellY * model.cellHeight + model.cellHeight / 2;
@@ -120,7 +123,7 @@ namespace DogsKickAss
                     future.x = centerCellX - 50 - width / 2;
                 }
             }
-            else
+            else if (dy < dx)
             {
                 if (dy > -dx)
                 {
@@ -134,6 +137,13 @@ namespace DogsKickAss
                 }
             }
         }
+        public void CirclePhysics(Model model)
+        {
+            
+        }
+        public void valid(Model model, int cellX, int cellY)
+        {
 
+        }
     }
 }

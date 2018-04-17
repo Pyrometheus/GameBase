@@ -18,3 +18,13 @@ C:\Projects\MyDickIsSmall\DogsKickAss\obj\Debug\DogsKickAss.csproj.GenerateResou
 C:\Projects\MyDickIsSmall\DogsKickAss\obj\Debug\DogsKickAss.csproj.CoreCompileInputs.cache
 C:\Projects\MyDickIsSmall\DogsKickAss\obj\Debug\DogsKickAss.exe
 C:\Projects\MyDickIsSmall\DogsKickAss\obj\Debug\DogsKickAss.pdb
+C:\Projects\GameBase\DogsKickAss\bin\Debug\DogsKickAss.exe.config
+C:\Projects\GameBase\DogsKickAss\bin\Debug\DogsKickAss.exe
+C:\Projects\GameBase\DogsKickAss\bin\Debug\DogsKickAss.pdb
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.csprojResolveAssemblyReference.cache
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.Form1.resources
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.Properties.Resources.resources
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.csproj.GenerateResource.cache
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.csproj.CoreCompileInputs.cache
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.exe
+C:\Projects\GameBase\DogsKickAss\obj\Debug\DogsKickAss.pdb
