@@ -28,16 +28,27 @@ namespace DogsKickAss
             keys = new HashSet<Keys>();
 
             //left wall
-            fillArea(0,0, 0,5, true);
+            fillArea(0, 0, 0, 5, true);
             //upper wall
-            fillArea(8,0, 15,0, true);
+            fillArea(8, 0, 15, 0, true);
             //bottom floor
-            fillArea(0, 5, 12, 5, true);
-
+            fillArea(0, 10, 18, 10, true);
+            //floor bumps
+            cells[11, 9] = true;
+            cells[15, 9] = true;
+            cells[15, 8] = true;
+            cells[4, 9] = true;
+            cells[4, 8] = true;
+            cells[4, 7] = true;
             //upper divits
             cells[9, 1] = true;
             cells[11, 1] = true;
             cells[14, 1] = true;
+            //platforms
+            cells[7, 7] = true;
+            cells[9, 5] = true;
+            cells[10, 5] = true;
+            fillArea(14, 5, 19, 5, true);
 
             keys = new HashSet<Keys>();
         }

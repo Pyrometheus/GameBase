@@ -13,7 +13,7 @@ namespace DogsKickAss
         public float xVelocity;
         public float yVelocity;
         public float jumpForce;
-        public bool grounded = true;
+        public bool grounded = false;
         public float fallForce;
         public float xSpeed;
         public float ySpeed;
@@ -33,7 +33,7 @@ namespace DogsKickAss
             //MOVEMENT
             this.xVelocity = 0;
             this.yVelocity = 0;
-            this.jumpForce = 10;
+            this.jumpForce = 20;
             this.fallForce = 0;
             this.xSpeed = 5;
             this.ySpeed = 5;
@@ -58,10 +58,16 @@ namespace DogsKickAss
                 xVelocity += -xSpeed;
             if (model.isKeyDown(Keys.D))
                 xVelocity += xSpeed;
-            if (model.isKeyDown(Keys.W))
-                yVelocity += -ySpeed;
-            if (model.isKeyDown(Keys.S))
-                yVelocity += ySpeed;
+            //Y-axis, gravity and jump
+            if (model.isKeyDown(Keys.W) && grounded == true)
+            {
+                ySpeed = -jumpForce;
+                grounded = false;
+            }
+            //gravity
+            if (ySpeed < 10)
+                ySpeed += 1;
+            yVelocity += ySpeed;
         }
 
         //MOVEMENT FUNCTION
@@ -99,7 +105,11 @@ namespace DogsKickAss
         public void tryCollide(Model model, int cellX, int cellY)
         {
             if (model.Occupied(cellX, cellY))
+            {
                 squarecollide(model, cellX, cellY);
+                ySpeed = 0;
+                grounded = true;
+            }
         }
 
         public void squarecollide(Model model, int cellX, int cellY)
@@ -136,14 +146,6 @@ namespace DogsKickAss
                     future.y = centerCellY - 50 - height / 2;
                 }
             }
-        }
-        public void CirclePhysics(Model model)
-        {
-            
-        }
-        public void valid(Model model, int cellX, int cellY)
-        {
-
         }
     }
 }
